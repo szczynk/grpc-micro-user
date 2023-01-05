@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "auth"
+		},
+		{
+			"path": "user"
+		},
+		{
+			"path": "mail"
+		},
+		{
+			"path": "../casbin/casbin-server"
+		},
+		{
+			"path": "grpc-gateway"
+		}
+	],
+	"settings": {}
+}
