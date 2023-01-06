@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "./;pb";
+
+message Role {
+  uint32 id = 1;
+  string role = 2;
+  google.protobuf.Timestamp created_at = 3;
+  google.protobuf.Timestamp updated_at = 4;
+}
+
+
+// Create Role
+message CreateRoleRequest{
+  string role = 1;
+}
+
+message CreateRoleResponse {
+  Role role = 1;
+}
+
+// Delete Role By ID
+message DeleteRoleByIdRequest { 
+  uint32 id = 1;
+}
+
+message DeleteRoleByIdResponse {
+  string message = 1;
+}
+
+
+// Find Roles
+message FindRolesRequest {
+  string role = 1;
+
+  uint32 page = 2;
+  uint32 limit = 3;
+  string sort = 4;
+}
+
+message FindRolesResponse {
+  uint32 totalCount = 1;
+  uint32 totalPages = 2;
+  uint32 page = 3;
+  uint32 limit = 4;
+  bool hasMore = 5;
+
+  repeated Role Roles = 6;
+}

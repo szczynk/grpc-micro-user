@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+
+option go_package = "./;pb";
+
+message User {
+  string id = 1;
+  string username = 2;
+  string email = 3;
+  string role = 4;
+  string avatar = 5;
+  bool verified = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+}
+
+
+// Register
+message RegisterRequest {
+  string username = 1 [(validate.rules).string.min_len = 5];
+  string email = 2 [(validate.rules).string.email = true];
+  string password = 3 [(validate.rules).string.min_len = 8];
+}
+
+message RegisterResponse {
+  User user = 1;
+  string message = 2;
+}
+
+// Login
+message LoginRequest {
+  string email = 1 [(validate.rules).string.email = true];
+  string password = 2 [(validate.rules).string.min_len = 8];
+}
+
+message LoginResponse {
+  User user = 1;
+  string access_token = 2;
+  string refresh_token = 3;
+  google.protobuf.Timestamp access_token_expires_at = 4;
+  google.protobuf.Timestamp refresh_token_expires_at = 5;
+}
+
+// ForgotPassword
+message ForgotPasswordRequest { 
+  string email = 1 [(validate.rules).string.email = true]; 
+}
+
+message ForgotPasswordResponse {
+  string message = 1;
+}
+
+// ResetPassword
+message ResetPasswordRequest { 
+  string resetToken = 1; 
+  string password = 2 [(validate.rules).string.min_len = 8];
+}
+
+message ResetPasswordResponse {
+  string message = 1;
+}
+
+// VerifyEmail
+message VerifyEmailRequest { 
+  string code = 1; 
+}
+
+message VerifyEmailResponse {
+  string message = 1;
+}

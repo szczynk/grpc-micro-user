@@ -1,0 +1,140 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+
+option go_package = "./;pb";
+
+message User {
+  string id = 1;
+  string username = 2;
+  string email = 3;
+  string role = 4;
+  string avatar = 5;
+  bool verified = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+}
+
+
+// Update Me
+message UpdateMeRequest {
+  optional string username = 1 [(validate.rules).string.min_len = 5];
+  optional string avatar = 2;
+}
+
+message UpdateMeResponse {
+  User user = 1;
+}
+
+// Change Email
+message ChangeEmailRequest {
+  string email = 1 [(validate.rules).string.email = true];
+}
+
+message ChangeEmailResponse {
+  User user = 1;
+  string message = 2;
+}
+
+// Refresh Access Token
+message RefreshAccessTokenRequest {
+  string refresh_token = 1;
+}
+
+message RefreshAccessTokenResponse {
+  string access_token = 1;
+  google.protobuf.Timestamp access_token_expires_at = 2;
+}
+
+// Logout
+message LogoutRequest {
+  string refresh_token = 1;
+}
+
+message LogoutResponse {}
+
+
+// GetMe
+message GetMeRequest{}
+
+message GetMeResponse {
+  User user = 1;
+}
+
+
+
+
+// Create User
+message CreateUserRequest{
+  string username = 1 [(validate.rules).string.min_len = 5];
+  string email = 2 [(validate.rules).string.email = true];
+  string password = 3 [(validate.rules).string.min_len = 8];
+  string role = 4;
+  string avatar = 5;
+  bool verified = 6;
+}
+
+message CreateUserResponse {
+  User user = 1;
+  string message = 2;
+}
+
+// Update User By ID
+message UpdateUserByIdRequest{
+  string id = 1 [(validate.rules).string.uuid = true];
+  string username = 2 [(validate.rules).string.min_len = 5];
+  string email = 3 [(validate.rules).string.email = true];
+  string password = 4 [(validate.rules).string.min_len = 8];
+  string role = 5;
+  string avatar = 6;
+  bool verified = 7;
+}
+
+message UpdateUserByIdResponse {
+  User user = 1;
+}
+
+// Delete User By ID
+message DeleteUserByIdRequest { 
+  string id = 1 [(validate.rules).string.uuid = true];
+}
+
+message DeleteUserByIdResponse {
+  string message = 1;
+}
+
+
+// Find Users
+message FindUsersRequest {
+  string username =1;
+  string email = 2;
+  string role = 3;
+  string verified = 4;
+
+  uint32 page = 5;
+  uint32 limit = 6;
+  string sort = 7;
+}
+
+message FindUsersResponse {
+  uint32 totalCount = 1;
+  uint32 totalPages = 2;
+  uint32 page = 3;
+  uint32 limit = 4;
+  bool hasMore = 5;
+
+  repeated User Users = 6;
+}
+
+// Find User By ID
+message FindUserByIdRequest {
+  string id = 1 [(validate.rules).string.uuid = true];
+}
+
+message FindUserByIdResponse {
+  User user = 1;
+}
+

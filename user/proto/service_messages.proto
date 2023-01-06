@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+
+option go_package = "./;pb";
+
+message Service {
+  uint32 id = 1;
+  string service = 2;
+  google.protobuf.Timestamp created_at = 3;
+  google.protobuf.Timestamp updated_at = 4;
+}
+
+
+// Create Service
+message CreateServiceRequest{
+  string service = 1 [(validate.rules).string.prefix = "pb."];
+}
+
+message CreateServiceResponse {
+  Service service = 1;
+}
+
+// Delete Service By ID
+message DeleteServiceByIdRequest { 
+  uint32 id = 1;
+}
+
+message DeleteServiceByIdResponse {
+  string message = 1;
+}
+
+
+// Find Services
+message FindServicesRequest {
+  string service = 1;
+
+  uint32 page = 2;
+  uint32 limit = 3;
+  string sort = 4;
+}
+
+message FindServicesResponse {
+  uint32 totalCount = 1;
+  uint32 totalPages = 2;
+  uint32 page = 3;
+  uint32 limit = 4;
+  bool hasMore = 5;
+
+  repeated Service Services = 6;
+}

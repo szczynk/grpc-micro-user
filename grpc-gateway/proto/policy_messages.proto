@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package pb;
+
+import "validate/validate.proto";
+
+option go_package = "./;pb";
+
+message Policy {
+  string role = 1;
+  string service = 2;
+  string method = 3;
+}
+
+
+// Create Policy
+message CreatePolicyRequest{
+  string role = 1;
+  string service = 2 [(validate.rules).string.prefix = "pb."];
+  string method = 3;
+}
+
+message CreatePolicyResponse {
+  Policy policy = 1;
+}
+
+// Delete Policy By ID
+message DeletePolicyRequest { 
+  string role = 1;
+  string service = 2 [(validate.rules).string.prefix = "pb."];
+  string method = 3;
+}
+
+message DeletePolicyResponse {
+  bool res = 1;
+}
+
+
+// Find Policies
+message FindPoliciesRequest {
+  string role = 1;
+  string service = 2;
+  string method = 3;
+}
+
+message FindPoliciesResponse {
+  uint32 totalCount = 1;
+
+  repeated Policy Policies = 2;
+}

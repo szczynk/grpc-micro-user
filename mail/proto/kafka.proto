@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pb;
+
+import "validate/validate.proto";
+
+option go_package = "./;pb";
+
+message VerifyEmail {
+  string ID = 1 [(validate.rules).string.uuid = true];
+  string username = 2 [(validate.rules).string.min_len = 5];
+  string email = 3 [(validate.rules).string.email = true];
+}
+
+message ResetPassword {
+  string ID = 1 [(validate.rules).string.uuid = true];
+  string username = 2 [(validate.rules).string.min_len = 5];
+  string email = 3 [(validate.rules).string.email = true];
+}

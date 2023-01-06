@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "./;pb";
+
+message Method {
+  uint32 id = 1;
+  string method = 2;
+  google.protobuf.Timestamp created_at = 3;
+  google.protobuf.Timestamp updated_at = 4;
+}
+
+
+// Create Method
+message CreateMethodRequest{
+  string method = 1;
+}
+
+message CreateMethodResponse {
+  Method method = 1;
+}
+
+// Delete Method By ID
+message DeleteMethodByIdRequest { 
+  uint32 id = 1;
+}
+
+message DeleteMethodByIdResponse {
+  string message = 1;
+}
+
+
+// Find Methods
+message FindMethodsRequest {
+  string method = 1;
+
+  uint32 page = 2;
+  uint32 limit = 3;
+  string sort = 4;
+}
+
+message FindMethodsResponse {
+  uint32 totalCount = 1;
+  uint32 totalPages = 2;
+  uint32 page = 3;
+  uint32 limit = 4;
+  bool hasMore = 5;
+
+  repeated Method Methods = 6;
+}
