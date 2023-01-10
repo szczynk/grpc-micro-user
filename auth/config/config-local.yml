@@ -1,0 +1,77 @@
+server:
+  AppVersion: 1.0.0
+  Port: :5001
+  Mode: Development
+  JwtSecretKey: vdZwzfdGBIJ8133KR4fq7GRvLwEH1FI5
+  ReadTimeout: 5
+  WriteTimeout: 5
+  Debug: true
+  MaxConnectionIdle: 5
+  Timeout: 15
+  MaxConnectionAge: 5
+  Time: 120
+
+logger:
+  Development: true
+  DisableCaller: true
+  DisableStacktrace: true
+  Encoding: console
+  Level: debug
+
+postgres:
+  PostgresHost: localhost
+  PostgresPort: 5432
+  PostgresUser: postgres
+  PostgresPassword: postgres
+  PostgresDbname: auth_db
+  PostgresSslmode: disable
+
+redis:
+  RedisAddr: localhost:6379
+  RedisPassword:
+  RedisDb: 0
+  RedisDefaultdb: 0
+  MinIdleConns: 200
+  PoolSize: 12000
+  PoolTimeout: 240
+  Password: admin
+  DB: 0
+
+kafka:
+  brokers: [ "localhost:9092" ]
+  groupID: user_consumer
+  initTopics: false
+
+refreshToken:
+  MaxAge: 24h
+
+accessToken:
+  Expire: 1h
+
+smtp:
+  Host: 127.0.0.1
+  Port: 1025
+  User: ""
+  Pass: ""
+  SenderIdentity: Winow
+  SenderEmail: winow@admin.com
+
+gateway:
+  Port: :6001
+
+casbin:
+  PostgresHost: localhost
+  PostgresPort: 5432
+  PostgresUser: postgres
+  PostgresPassword: postgres
+  PostgresSslmode: disable
+  Url: localhost:50051
+
+metrics:
+  Url: localhost:7001
+  ServiceName: grpc_auth
+
+jaeger:
+  Host: localhost:6831
+  ServiceName: grpc_auth
+  LogSpans: false
