@@ -126,7 +126,7 @@ message FindUsersResponse {
   uint32 limit = 4;
   bool has_more = 5;
 
-  repeated User Users = 6;
+  repeated User users = 6;
 }
 
 // Find User By ID

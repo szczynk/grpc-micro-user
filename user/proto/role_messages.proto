@@ -50,5 +50,5 @@ message FindRolesResponse {
   uint32 limit = 4;
   bool has_more = 5;
 
-  repeated Role Roles = 6;
+  repeated Role roles = 6;
 }
