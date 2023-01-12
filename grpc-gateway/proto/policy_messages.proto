@@ -44,7 +44,7 @@ message FindPoliciesRequest {
 }
 
 message FindPoliciesResponse {
-  uint32 totalCount = 1;
+  uint32 total_count = 1;
 
   repeated Policy Policies = 2;
 }

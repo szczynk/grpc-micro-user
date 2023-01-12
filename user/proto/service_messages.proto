@@ -44,11 +44,11 @@ message FindServicesRequest {
 }
 
 message FindServicesResponse {
-  uint32 totalCount = 1;
-  uint32 totalPages = 2;
+  uint32 total_count = 1;
+  uint32 total_pages = 2;
   uint32 page = 3;
   uint32 limit = 4;
-  bool hasMore = 5;
+  bool has_more = 5;
 
   repeated Service Services = 6;
 }

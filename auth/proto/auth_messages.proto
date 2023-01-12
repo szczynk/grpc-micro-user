@@ -56,7 +56,7 @@ message ForgotPasswordResponse {
 
 // ResetPassword
 message ResetPasswordRequest { 
-  string resetToken = 1; 
+  string reset_token = 1; 
   string password = 2 [(validate.rules).string.min_len = 8];
 }
 

@@ -57,7 +57,7 @@ message ForgotPasswordResponse {
 
 // ResetPassword
 message ResetPasswordRequest { 
-  string resetToken = 1; 
+  string reset_token = 1; 
   string password = 2 [(validate.rules).string.min_len = 8];
 }
 
@@ -177,11 +177,11 @@ message FindUsersRequest {
 }
 
 message FindUsersResponse {
-  uint32 totalCount = 1;
-  uint32 totalPages = 2;
+  uint32 total_count = 1;
+  uint32 total_pages = 2;
   uint32 page = 3;
   uint32 limit = 4;
-  bool hasMore = 5;
+  bool has_more = 5;
 
   repeated User Users = 6;
 }
